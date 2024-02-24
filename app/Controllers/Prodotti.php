@@ -13,6 +13,8 @@ class Prodotti extends BaseController {
             'title' => 'Prodotti',
         ];
 
-        return view('list', $data);
+        return view('templates/header', $data)
+                .view('list', $data)
+                .view('templates/footer');
     }
 }
