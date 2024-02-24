@@ -1,21 +1,22 @@
 <h2><?= esc($title) ?></h2>
 
-<?php if (! empty($oggetti) && is_array($oggetti)): ?>
+<?php if (! empty($prodotti) && is_array($prodotti)): ?>
 
-    <?php foreach ($oggetti as $oggetti_item): ?>
+    <?php foreach ($prodotti as $prodotti_item): ?>
 
-        <h3><?= esc($oggetti_item['id_ordine']) ?></h3>
+        <h3><?= esc($prodotti_item->nome) ?></h3>
 
         <div class="main">
-            <?= esc($oggetti_item['id_prodotto']) ?>
+            <?= esc($prodotti_item->descrizione) ?>
+            Codice: <?= esc($prodotti_item->id) ?>
         </div>
 
     <?php endforeach ?>
 
 <?php else: ?>
 
-    <h3>No oggetti</h3>
+    <h3>No prodotti</h3>
 
-    <p>Unable to find any oggetti for you.</p>
+    <p>Unable to find any prodotti for you.</p>
 
 <?php endif ?>

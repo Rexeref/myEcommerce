@@ -6,9 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-use App\Controllers\Oggetti;
+use App\Controllers\Prodotti;
 
-$routes->get('/', 'Oggetti::index');
+$routes->get('/', 'Prodotti::index');
 
 //$routes->get('news', [News::class, 'index']);
 //$routes->get('news/(:segment)', [News::class, 'show']);
