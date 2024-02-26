@@ -14,7 +14,14 @@ Il progetto è un'applicazione web che offre funzionalità di e-commerce per la 
 ;extension=intl
 . . .
 ```
-3. Avviare con il seguente comando il server 
+3. Scaricare le dipendenze
+```
+composer install
+composer update
+```
+4. Creare una copia del file **env-dummy** con il nome **.env** dove si configurerà l'accesso al DB MySQL
+5. Utilizzare i file in *./app/Database/Migrations/* per creare un database di esempio o uno vuoto
+6. Avviare con il seguente comando il server 
 ```
 php spark serve
 ```
