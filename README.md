@@ -8,7 +8,13 @@ Il progetto è un'applicazione web che offre funzionalità di e-commerce per la 
 
 ## Avvio
 1. Installare e configurare PHP, un server MySQL e Composer
-2. Avviare con il seguente comando il server 
+2. Attivare i seguenti package nel file php.ini
+```
+. . .
+;extension=intl
+. . .
+```
+3. Avviare con il seguente comando il server 
 ```
 php spark serve
 ```
