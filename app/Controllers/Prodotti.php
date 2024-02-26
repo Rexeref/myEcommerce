@@ -14,7 +14,7 @@ class Prodotti extends BaseController {
         ];
 
         return view('templates/header', $data)
-                .view('list', $data)
+                .view('v_list', $data)
                 .view('templates/footer');
     }
 }

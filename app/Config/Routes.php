@@ -9,8 +9,8 @@ use CodeIgniter\Router\RouteCollection;
 use App\Controllers\Login;
 use App\Controllers\Prodotti;
 
-$routes->get('login', 'c_Login::index');
-$routes->get('/', 'c_Prodotti::index');
+$routes->post('login/check', [Login::class, 'challengeResponse']);
+$routes->get('login/(:segment)', [Login::class, 'challengeResponse']);
+$routes->get('login', [Login::class, 'index']);
 
-//$routes->get('news', [News::class, 'index']);
-//$routes->get('news/(:segment)', [News::class, 'show']);
+$routes->get('/', [Prodotti::class, 'index']);
