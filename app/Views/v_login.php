@@ -1,8 +1,8 @@
 <h2><?= esc($title) ?></h2>
 
-<?php 
-    
-    if (! empty($prodotti) && is_array($prodotti)):
+<?php
+    session_start();
+    if (! empty($_SESSION["active"])):
 ?>
 
     <form>

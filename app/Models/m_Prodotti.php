@@ -3,7 +3,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class ProdottiModel extends Model
+class Prodotti extends Model
 {
     protected $table = 'prodotti';
 

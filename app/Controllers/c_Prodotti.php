@@ -1,12 +1,12 @@
 <?php 
 
 namespace App\Controllers;
-use App\Models\ProdottiModel;
+use App\Models\m_Prodotti;
 
 class Prodotti extends BaseController {
     public function index()
     {
-        $model = model(ProdottiModel::class);
+        $model = model(m_Prodotti::class);
 
         $data = [
             'prodotti'  => $model->getProdotti(),
