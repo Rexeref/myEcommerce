@@ -152,7 +152,7 @@ INSERT INTO `prodotti` (`id`, `id_categoria`, `id_prodotto`, `nome`, `descrizion
 	(4, 2, NULL, 'Tavolo da Cucina', 'Tavolo da cucina moderno', 250, ''),
 	(5, 3, NULL, 'Divano in Pelle', 'Divano moderno in pelle', 1000, ''),
 	(6, 3, NULL, 'Divano a Due Pos', 'Divano a due posti elegante', 700, ''),
-	(7, 4, NULL, 'Specchio da Ingr', 'Specchio decorativo per l\'ingresso', 150, ''),
+	(7, 4, NULL, 'Specchio da Ingr', "Specchio decorativo per l\'ingresso", 150, ''),
 	(8, 5, 1, 'Cuscino Memory F', 'Cuscino in memory foam per il letto', 50, ''),
 	(9, 5, 1, 'Coperta Calda', 'Coperta morbida e calda', 30, ''),
 	(10, 6, 1, 'Armadio a 3 Ante', 'Armadio spazioso a 3 ante', 600, '');
@@ -178,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `utenti` (
   `id_ruolo` int(11) NOT NULL,
   `username` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `salt` varchar(16) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_persona` (`id_persona`),
   KEY `id_ruolo` (`id_ruolo`),

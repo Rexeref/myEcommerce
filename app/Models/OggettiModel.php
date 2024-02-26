@@ -3,11 +3,11 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class Account extends Model
+class OggettiModel extends Model
 {
-    protected $table = 'utenti';
+    protected $table = 'oggetti';
 
-    public function getList()
+    public function getOggetti()
     {
         return $this->findAll();
     }
