@@ -3,8 +3,6 @@
 </h2>
 
 <?php if (!empty($prodotto) && is_array($prodotto)): ?>
-
-        <?php print_r($prodotto);?>
         
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="..." alt="Card image cap">

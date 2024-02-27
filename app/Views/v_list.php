@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title"><?= esc($prodotti_item->nome) ?></h5>
                 <p class="card-text"><?= esc($prodotti_item->descrizione) ?></p>
-                <a href="" class="btn btn-primary">Vedi Articolo</a>
+                <a href="/product?id=<?= esc($prodotti_item->id) ?>" class="btn btn-primary">Vedi Articolo</a>
             </div>
         </div>
 

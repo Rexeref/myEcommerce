@@ -23,10 +23,11 @@ class Prodotti extends BaseController {
         $model = model(ProdottiModel::class);
 
         $id = $this->request->getGet('id');
+        $item = $model->getProdotto($id);
 
         $data = [
-            'prodotto'  => $model->getProdotto($id),
-            'title' => 'Prodotti',
+            'prodotto'  => $item,
+            'title' => $item[0]->nome,
         ];
 
         return view('templates/header', $data)
