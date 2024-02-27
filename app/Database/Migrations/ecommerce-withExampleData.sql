@@ -173,18 +173,15 @@ INSERT INTO `ruoli` (`id`, `nome_ruolo`, `livello`) VALUES
 
 -- Dump della struttura di tabella ecommerce.utenti
 CREATE TABLE IF NOT EXISTS `utenti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_persona` int(11) NOT NULL,
-  `id_ruolo` int(11) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `salt` varchar(16) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_persona` (`id_persona`),
-  KEY `id_ruolo` (`id_ruolo`),
-  CONSTRAINT `utenti_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persone` (`id`),
-  CONSTRAINT `utenti_ibfk_2` FOREIGN KEY (`id_ruolo`) REFERENCES `ruoli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id_persona` int(11) DEFAULT NULL,
+	`id_ruolo` int(11) NOT NULL,
+	`username` varchar(64) NOT NULL,
+	`password` varchar(64) NOT NULL,
+	`salt` varchar(16) NOT NULL,
+	FOREIGN KEY (id_persona) REFERENCES persone(id),
+	FOREIGN KEY (id_ruolo) REFERENCES ruoli(id)
+);
 
 -- Dump dei dati della tabella ecommerce.utenti: ~8 rows (circa)
 INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`) VALUES

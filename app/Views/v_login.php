@@ -7,13 +7,16 @@
         echo '<div class="warning">';
         switch ($error) {
             case 1:
-                    echo '<h1>Nickname Vuoto</h1>';
+                    echo '<h3>Username Vuoto</h3>';
                 break;
             case 2:
-                    echo '<h1>Password Vuota</h1>';
+                    echo '<h3>Password Vuota</h3>';
                 break;
             case 3:
-                    echo '<h1>Account non trovato</h1>';
+                    echo '<h3>Account non trovato</h3>';
+                break;
+            case 4:
+                    echo "<h3>L'account è stato registrato correttamente, ora fai il login</h3>";
                 break;
             default:
                 break;
@@ -22,8 +25,8 @@
 ?>
     <form action="login/check" method="POST">
         <div class="mb-3">
-            <label for="nickname" class="form-label">Nickname</label>
-            <input type="text" class="form-control" id="nickname" name="nickname">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

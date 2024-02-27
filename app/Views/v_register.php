@@ -3,12 +3,29 @@
 <?php
     $session = session();
     if ( empty( $session->active ) || $session->active == false ):
+
+        echo '<div class="warning">';
+        switch ($error) {
+            case 1:
+                    echo '<h3>Username Vuoto</h3>';
+                break;
+            case 2:
+                    echo '<h3>Password Vuota</h3>';
+                break;
+            case 3:
+                    echo '<h3>Username già presente</h3>';
+                break;
+            default:
+                break;
+        }
+        echo '</div>';
+
 ?>
 
-    <form action="login/check" method="POST">
+    <form action="register/check" method="POST">
         <div class="mb-3">
-            <label for="nickname" class="form-label">Nickname</label>
-            <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="emailHelp">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -50,11 +67,7 @@
     </form>
 
 
-<?php else: ?>
-
-    You're already logged in!
-
-<?php 
+<?php else: 
     return redirect()->to("/"); 
     endif 
 ?>

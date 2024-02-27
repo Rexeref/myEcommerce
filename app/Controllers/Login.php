@@ -4,26 +4,15 @@ namespace App\Controllers;
 use App\Models\AccountModel;
 
 class Login extends BaseController {
-    public function index($error = 0)
+    public function index()
     {
         $data = [
             'title' => 'Login',
-            'error' => $error
+            'error' => $this->request->getGet('e')
         ];
 
         return view('templates/header', $data)
                 .view('v_login', $data)
-                .view('templates/footer');
-    }
-
-    public function registerForm()
-    {
-        $data = [
-            'title' => 'Register',
-        ];
-
-        return view('templates/header', $data)
-                .view('v_register')
                 .view('templates/footer');
     }
 
@@ -56,14 +45,30 @@ class Login extends BaseController {
         return redirect()->to("/");
     }
 
+    public function registerForm()
+    {
+        $data = [
+            'title' => 'Register',
+            'error' => $this->request->getGet('e')
+        ];
+
+        return view('templates/header', $data)
+                .view('v_register', $data)
+                .view('templates/footer');
+    }
+
     public function register()
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        if ($username == '' or $password == '')
+        if ($username == '')
         {
-            return redirect()->to("/register"); // todo: Inserire cose con il get per mostrare dov'è il login è in errore (eg. username vuoto)
+            return redirect()->to("/register?e=1"); // Nickname Vuoto
+        }
+        if ($password == '')
+        {
+            return redirect()->to("/register?e=2"); // Password Vuota
         }
 
         $model = model(AccountModel::class);
@@ -71,10 +76,10 @@ class Login extends BaseController {
 
         if(!$status) // esegui se status == false
         {
-            return redirect()->to("/register"); // todo: Inserire cose con il get per mostrare che il username è giò stato registrato e di sceglienerne un'altro
+            return redirect()->to("/register?e=3"); // Se il nickname già esiste
         }
 
-        return redirect()->to("login"); // todo: Inserire cose con il get per indicare di loggarsi
+        return redirect()->to("login?e=4"); // Loggarsi con l'account creato
     }
 
     public function logout()

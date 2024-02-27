@@ -25,17 +25,16 @@ CREATE TABLE IF NOT EXISTS ruoli (
 	livello INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS utenti (
-	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	id_persona int(11) NOT NULL,
-	id_ruolo int(11) NOT NULL,
-	username varchar(64) NOT NULL,
-	password varchar(64) NOT NULL,
-	salt varchar(16) NOT NULL,
+CREATE TABLE IF NOT EXISTS `utenti` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id_persona` int(11) DEFAULT NULL,
+	`id_ruolo` int(11) NOT NULL,
+	`username` varchar(64) NOT NULL,
+	`password` varchar(64) NOT NULL,
+	`salt` varchar(16) NOT NULL,
 	FOREIGN KEY (id_persona) REFERENCES persone(id),
 	FOREIGN KEY (id_ruolo) REFERENCES ruoli(id)
 );
-
 
 CREATE TABLE IF NOT EXISTS ordini (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

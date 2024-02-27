@@ -30,22 +30,23 @@ class AccountModel extends Model
 
     public function isNickUnique($value)
     {
-        return $this->db->table($this->table)->where('nickname', $value)->countAllResults() ==  0;
+        return $this->db->table('utenti')->where('username', $value)->countAllResults() ==  0;
     }
 
     public function registerNewUser($nickname, $password)
     {
-        $salt = random_string(16);
+        $salt = $this->random_str();
 
         $data = [
             "salt" => $salt,
-            "nickname" => hash('sha256', $nickname . $salt),
-            "password" => password_hash($password, PASSWORD_DEFAULT)
+            "username" => hash('sha256', $nickname),
+            "password" => password_hash($password . $salt, PASSWORD_DEFAULT),
+            "id_ruolo" => 3,
         ];
 
         $status = false;
 
-        if( $this->isNickUnique($data['nickname']) )
+        if( $this->isNickUnique($data['username']) )
         {
             $this->db->table('utenti')->insert($data);
             $status = true;
