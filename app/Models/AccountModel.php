@@ -57,16 +57,17 @@ class AccountModel extends Model
 
     public function checkNickPass(string $nickname, string $password): array
     {
+
         $nicknameHash = hash('sha256', $nickname);
 
-        $account = $this->table('utenti')->where('nickname', $nicknameHash)->first();
+        $account = $this->table('utenti')->where('username', $nicknameHash)->first();
 
         $data = [
             'status' => 'false',
             'userId' =>  0
         ];
 
-        if ($account && password_verify($password, $account['password'])) {
+        if ($account && password_verify(password_hash($password . $account['salt'], PASSWORD_DEFAULT), $account['password'])) {
             $data['status'] = 'true';
             $data['userId'] = $account['id'];
         }

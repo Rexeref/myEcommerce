@@ -36,7 +36,5 @@
     </form>
 
 <?php else: ?>
-
-    You're already logged in!
-
+    <h1>sei già loggato!</h1>
 <?php endif ?>

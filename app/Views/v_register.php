@@ -31,6 +31,7 @@
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
+        <!--
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome">
@@ -62,12 +63,11 @@
         <div class="mb-3">
             <label for="codice_postale" class="form-label">Codice Postale</label>
             <input type="text" class="form-control" id="codice_postale" name="codice_postale">
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 
-<?php else: 
-    return redirect()->to("/"); 
-    endif 
-?>
+<?php else: ?>
+    <h1>sei già loggato!</h1>
+<?php endif ?>

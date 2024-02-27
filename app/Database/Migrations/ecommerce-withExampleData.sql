@@ -183,16 +183,11 @@ CREATE TABLE IF NOT EXISTS `utenti` (
 	FOREIGN KEY (id_ruolo) REFERENCES ruoli(id)
 );
 
--- Dump dei dati della tabella ecommerce.utenti: ~8 rows (circa)
-INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`) VALUES
-	(1, 1, 3, 'utente', 'utente'),
-	(2, 2, 3, 'luca.bianchi', 'securepwd456'),
-	(3, 3, 3, 'giovanna.verdi', 'strongpass789'),
-	(4, 4, 1, 'admin', 'admin'),
-	(5, 5, 3, 'francesca.ferrari', 'mypassword567'),
-	(6, 6, 3, 'roberto.ricci', 'pass1234'),
-	(7, 7, 2, 'gestore', 'gestore'),
-	(8, 8, 3, 'paolo.gallo', 'password789');
+-- Dump dei dati della tabella ecommerce.utenti: ~2 rows (circa)
+DELETE FROM `utenti`;
+INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`, `salt`) VALUES
+	(1, NULL, 1, 'c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f', '$2y$10$xP7nFWOTiY6KrfvMTN8cp.fcvdsAyUggNISRQKUb97BjH/6kBlgyG', 'oJ2NhAkmzh6A3PTg'),
+	(2, NULL, 3, '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '$2y$10$N2nQuBm5UFEKZS3UK/4PGOr/JzWr8KsghO3KWstyfLL6M6JV3vZDG', 'PKMu4az84Qa8PH5h');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
