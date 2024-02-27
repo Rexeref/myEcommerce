@@ -57,7 +57,7 @@ class Login extends BaseController {
                 .view('templates/footer');
     }
 
-    public function register()
+    public function register() //TODO: Completare Login con gestione sessione
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
