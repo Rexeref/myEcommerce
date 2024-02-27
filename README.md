@@ -11,6 +11,7 @@ Il progetto è un'applicazione web che offre funzionalità di e-commerce per la 
 2. Attivare i seguenti package nel file php.ini
 ```
 ;extension=intl
+;extension=zip
 ```
 3. Scaricare le dipendenze
 ```
