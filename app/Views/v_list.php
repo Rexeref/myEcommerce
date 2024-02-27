@@ -1,14 +1,28 @@
-<h2><?= esc($title) ?></h2>
+<h2>
+    <?= esc($title) ?>
+</h2>
 
-<?php if (! empty($prodotti) && is_array($prodotti)): ?>
+<?php if (!empty($prodotti) && is_array($prodotti)): ?>
 
     <?php foreach ($prodotti as $prodotti_item): ?>
 
-        <h3><?= esc($prodotti_item->nome) ?></h3>
+        <h3>
+            
+        </h3>
 
         <div class="main">
-            <?= esc($prodotti_item->descrizione) ?>
-            Codice: <?= esc($prodotti_item->id) ?>
+            
+            Codice:
+            <?= esc($prodotti_item->id) ?>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?= esc($prodotti_item->nome) ?></h5>
+                <p class="card-text"><?= esc($prodotti_item->descrizione) ?></p>
+                <a href="" class="btn btn-primary">Vedi Articolo</a>
+            </div>
         </div>
 
     <?php endforeach ?>

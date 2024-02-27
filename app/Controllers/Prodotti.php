@@ -17,4 +17,20 @@ class Prodotti extends BaseController {
                 .view('v_list', $data)
                 .view('templates/footer');
     }
+
+    public function details()
+    {
+        $model = model(ProdottiModel::class);
+
+        $id = $this->request->getGet('id');
+
+        $data = [
+            'prodotto'  => $model->getProdotto($id),
+            'title' => 'Prodotti',
+        ];
+
+        return view('templates/header', $data)
+        .view('v_product', $data)
+        .view('templates/footer');
+    }
 }

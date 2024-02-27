@@ -9,7 +9,13 @@ class ProdottiModel extends Model
 
     public function getProdotti()
     {
-        $result = $this->db->table('prodotti')->join('oggetti', 'prodotti.id = oggetti.id_prodotto')->get();
+        $result = $this->db->table('prodotti')->join('oggetti', 'prodotti.id = oggetti.id_prodotto')->where('id_prodotto', null)->get();
+        return $result->getResult();
+    }
+
+    public function getProdotto($value)
+    {
+        $result = $this->db->table('prodotti')->where('id', $value)->get();
         return $result->getResult();
     }
 }

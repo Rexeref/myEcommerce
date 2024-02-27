@@ -17,5 +17,6 @@ $routes->get('login', [Login::class, 'index']);
 
 $routes->get('logout', [Login::class, 'logout']);
 
+$routes->get('product', [Prodotti::class, 'details']);
 
 $routes->get('/', [Prodotti::class, 'index']);
