@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Models\ProdottiModel;
 
 class Prodotti extends BaseController {
-    public function index()
+    public function listAll()
     {
         $model = model(ProdottiModel::class);
 

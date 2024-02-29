@@ -6,6 +6,7 @@ if (empty($session->active) || $session->active == false):
     <div id="form-container" class="text-center">
         <form class="form-signin" data-bitwarden-watching="1" action="login/check" method="POST">
             <img class="mb-4" src="<?= base_url('assets/images/logo.png') ?>" alt="Logo" width="250" height="250">
+            <h1>eCom</h1>
             <?php
             if ($error != 0) {
                 echo $error != 0 ? '<div class="bg-warning rounded-3 p-3 bs-text-primary-danger border border-danger-subtle container"><i class="bi-alarm"></i><h5>' : "";
@@ -39,7 +40,7 @@ if (empty($session->active) || $session->active == false):
             <input type="checkbox" value="remember-me"> Remember me
         </label>
     </div>-->
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Login <i class="bi bi-door-open"></i></button>
         </form>
     </div>
 

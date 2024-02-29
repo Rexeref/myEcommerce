@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 namespace App\Models;
+
 use CodeIgniter\Model;
 
 class ProdottiModel extends Model
@@ -8,8 +9,19 @@ class ProdottiModel extends Model
     protected $table = 'prodotti';
 
     public function getProdotti()
-    {
-        $result = $this->db->table('prodotti')->join('oggetti', 'prodotti.id = oggetti.id_prodotto')->where('prodotti.id_prodotto', null)->get();
+    {   
+        // Prende un prodotto per
+        $result = $this->db->query("SELECT *
+        FROM (
+            SELECT
+                prodotti.*,
+                oggetti.sconto,
+                ROW_NUMBER() OVER (PARTITION BY prodotti.id ORDER BY oggetti.sconto) AS rn
+            FROM prodotti
+            JOIN oggetti ON prodotti.id = oggetti.id_prodotto
+        ) AS subquery
+        WHERE rn = 1;
+        ");
         return $result->getResult();
     }
 

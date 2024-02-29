@@ -26,3 +26,5 @@ php spark serve
 ```
 
 Il server si avvierà su *http://localhost:8080*
+
+Se si utilizza il db di esempio gli utenti di base sono Admin, Seller e User, i quali avranno come password il loro stesso nome

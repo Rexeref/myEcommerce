@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/"><i class="bi bi-house"> Home</i></a>
                     </li>
                     <?php
                     $session = session();
@@ -45,28 +45,28 @@
                         ?>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="/login"><i class="bi bi-door-open"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">Register</a>
+                            <a class="nav-link" href="/register"><i class="bi bi-key"></i> Register</a>
                         </li>
 
                     <?php else: ?>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/account"><?= esc($session->userName) ?></a>
+                            <a class="nav-link" href="/account"><i class="bi bi-person-circle"></i> <?= esc($session->userName) ?></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/cart">Cart</a>
+                            <a class="nav-link" href="/cart"><i class="bi bi-cart"></i> Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
+                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
                         </li>
 
                     <?php endif ?>
 
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" action="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>

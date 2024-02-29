@@ -1,20 +1,3 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versione server:              10.4.32-MariaDB - mariadb.org binary distribution
--- S.O. server:                  Win64
--- HeidiSQL Versione:            12.6.0.6765
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
 -- Dump della struttura del database ecommerce
 CREATE DATABASE IF NOT EXISTS `ecommerce` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `ecommerce`;
@@ -68,44 +51,6 @@ INSERT INTO `indirizzi` (`id`, `indirizzo`, `completamento_indirizzo`, `stato`, 
 	(7, 'Corso Umberto I 34', 'Piano 2', 'Italia', 'Calabria', 'Reggio Calabria', '89100'),
 	(8, 'Via Roma 56', 'Interno 7', 'Italia', 'Puglia', 'Bari', '70100');
 
--- Dump della struttura di tabella ecommerce.oggetti
-CREATE TABLE IF NOT EXISTS `oggetti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ordine` int(11) DEFAULT NULL,
-  `id_prodotto` int(11) NOT NULL,
-  `sconto` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ordine` (`id_ordine`),
-  KEY `id_prodotto` (`id_prodotto`),
-  CONSTRAINT `oggetti_ibfk_1` FOREIGN KEY (`id_ordine`) REFERENCES `ordini` (`id`),
-  CONSTRAINT `oggetti_ibfk_2` FOREIGN KEY (`id_prodotto`) REFERENCES `prodotti` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dump dei dati della tabella ecommerce.oggetti: ~7 rows (circa)
-INSERT INTO `oggetti` (`id`, `id_ordine`, `id_prodotto`, `sconto`) VALUES
-	(1, 5, 5, NULL),
-	(2, 5, 9, NULL),
-	(3, NULL, 5, NULL),
-	(4, NULL, 5, NULL),
-	(5, NULL, 8, NULL),
-	(6, 6, 7, NULL),
-	(7, NULL, 3, NULL);
-
--- Dump della struttura di tabella ecommerce.ordini
-CREATE TABLE IF NOT EXISTS `ordini` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_utente` int(11) NOT NULL,
-  `carrello` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_utente` (`id_utente`),
-  CONSTRAINT `ordini_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utenti` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dump dei dati della tabella ecommerce.ordini: ~2 rows (circa)
-INSERT INTO `ordini` (`id`, `id_utente`, `carrello`) VALUES
-	(5, 1, 1),
-	(6, 1, 0);
-
 -- Dump della struttura di tabella ecommerce.persone
 CREATE TABLE IF NOT EXISTS `persone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -133,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `prodotti` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_categoria` int(11) NOT NULL,
   `id_prodotto` int(11) DEFAULT NULL,
-  `nome` varchar(16) NOT NULL,
+  `nome` varchar(64) NOT NULL,
   `descrizione` tinytext DEFAULT NULL,
   `prezzo` int(11) DEFAULT NULL,
   `immagine` varchar(64) DEFAULT NULL,
@@ -151,11 +96,36 @@ INSERT INTO `prodotti` (`id`, `id_categoria`, `id_prodotto`, `nome`, `descrizion
 	(3, 2, NULL, 'Tavolo da Pranzo', 'Tavolo da pranzo in legno', 300, ''),
 	(4, 2, NULL, 'Tavolo da Cucina', 'Tavolo da cucina moderno', 250, ''),
 	(5, 3, NULL, 'Divano in Pelle', 'Divano moderno in pelle', 1000, ''),
-	(6, 3, NULL, 'Divano a Due Pos', 'Divano a due posti elegante', 700, ''),
-	(7, 4, NULL, 'Specchio da Ingr', "Specchio decorativo per l\'ingresso", 150, ''),
-	(8, 5, 1, 'Cuscino Memory F', 'Cuscino in memory foam per il letto', 50, ''),
+	(6, 3, NULL, 'Divano a Due Posti', 'Divano a due posti elegante', 700, ''),
+	(7, 4, NULL, 'Specchio da Ingresso', "Specchio decorativo per l\'ingresso", 150, ''),
+	(8, 5, 1, 'Cuscino Memory Foam', 'Cuscino in memory foam per il letto', 50, ''),
 	(9, 5, 1, 'Coperta Calda', 'Coperta morbida e calda', 30, ''),
-	(10, 6, 1, 'Armadio a 3 Ante', 'Armadio spazioso a 3 ante', 600, '');
+	(10, 6, 1, 'Armadio a 3 Ante', 'Armadio spazioso a 3 ante', 600, ''),
+	(11, 1, NULL, 'Biancheria da Letto', 'Set di biancheria per il letto', 80, ''),
+	(12, 1, NULL, 'Comodino Moderno', 'Comodino con design moderno', 100, ''),
+	(13, 2, NULL, 'Set di Pentole', 'Set di pentole antiaderenti', 120, ''),
+	(14, 2, NULL, 'Accessori da Cucina', 'Set di accessori per la cucina', 50, ''),
+	(15, 3, NULL, 'Cuscini Decorati', 'Cuscini decorativi per il divano', 40, ''),
+	(16, 3, NULL, 'Tappeto Moderno', 'Tappeto moderno per il soggiorno', 90, ''),
+	(17, 4, NULL, 'Appendiabiti da Ingresso', 'Appendiabiti pratico e funzionale', 30, ''),
+	(18, 4, NULL, 'Pianta Decorativa', "Pianta in vaso per l\'ingresso", 25, ''),
+	(19, 5, NULL, 'Parure di Lenzuola', 'Parure di lenzuola in cotone', 60, ''),
+	(20, 5, NULL, 'Telo Copriletto', 'Telo copriletto leggero e confortevole', 35, ''),
+	(21, 6, NULL, 'Appendiabiti Interno', "Appendiabiti interno per l\'armadio", 20, ''),
+	(22, 6, NULL, 'Cassettiera Organizzativa', "Cassettiera per un\'organizzazione ottimale", 80, ''),
+	(23, 2, NULL, 'Sgabello da Bar Moderno', 'Sgabello da bar moderno', 40, ''),
+	(24, 2, NULL, 'Set di Coltelli Affilati', 'Set di coltelli affilati', 60, ''),
+	(25, 3, NULL, 'Tavolino da Soggiorno', 'Tavolino basso per il soggiorno', 120, ''),
+	(26, 1, 1, 'Lenzuola Extra', 'Set extra di lenzuola in cotone', 50, ''),
+	(27, 1, 2, 'Paracolpi per Letto', 'Paracolpi morbidi per il letto', 30, ''),
+	(28, 2, 3, 'Guanti da Cucina', 'Guanti resistenti al calore per la cucina', 15, ''),
+	(29, 2, 4, 'Tovagliette in Plastica', 'Set di tovagliette colorate', 10, ''),
+	(30, 3, 5, 'Cuscini Decorativi Aggiuntivi', 'Cuscini decorativi aggiuntivi per il divano', 25, ''),
+	(31, 3, 6, 'Tappeto Aggiuntivo', 'Tappeto aggiuntivo per il soggiorno', 50, ''),
+	(32, 4, 7, 'Appendiabiti Esterno', "Appendiabiti aggiuntivi per l\'ingresso", 10, ''),
+	(33, 4, 8, 'Cuscino per Sedie', 'Cuscino imbottito per sedia', 15, ''),
+	(34, 5, 9, 'Plaid Morbido', 'Plaid extra morbido', 20, ''),
+	(35, 5, 10, 'Organizzatore per Madie', 'Organizzatore interno per madie', 30, '');
 
 -- Dump della struttura di tabella ecommerce.ruoli
 CREATE TABLE IF NOT EXISTS `ruoli` (
@@ -178,19 +148,74 @@ CREATE TABLE IF NOT EXISTS `utenti` (
 	`id_ruolo` int(11) NOT NULL,
 	`username` varchar(64) NOT NULL,
 	`password` varchar(64) NOT NULL,
-	`salt` varchar(16) NOT NULL,
 	FOREIGN KEY (id_persona) REFERENCES persone(id),
 	FOREIGN KEY (id_ruolo) REFERENCES ruoli(id)
 );
 
--- Dump dei dati della tabella ecommerce.utenti: ~2 rows (circa)
-DELETE FROM `utenti`;
-INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`, `salt`) VALUES
-	(1, NULL, 1, 'c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f', '$2y$10$xP7nFWOTiY6KrfvMTN8cp.fcvdsAyUggNISRQKUb97BjH/6kBlgyG', 'oJ2NhAkmzh6A3PTg'),
-	(2, NULL, 3, '0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90', '$2y$10$N2nQuBm5UFEKZS3UK/4PGOr/JzWr8KsghO3KWstyfLL6M6JV3vZDG', 'PKMu4az84Qa8PH5h');
+-- Dump dei dati della tabella ecommerce.utenti: ~3 rows (circa)
+INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`) VALUES
+	(1, NULL, 3, 'c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f', '$2y$10$7q3pyTlyO8Nvv1OlbgMw5O4LdvjEtBZYjISeBjkDPLeuF/9Fx3cE.'),
+	(2, NULL, 3, 'b512d97e7cbf97c273e4db073bbb547aa65a84589227f8f3d9e4a72b9372a24d', '$2y$10$AFI7xVbICt9M48SueskAMOGqSuvzgN0QhjhmelgfxihA4jXIcSSvW'),
+	(3, NULL, 3, '01498fa31d5a344a6a66c69dc5671c8d0f86953c2268c1c9274b259add7bae4b', '$2y$10$jEEjfAtdOLPVn3ION0Wy/uhhkTY38Xi0qadOYLpq9duZMEpjKhc/O');
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
+-- Dump della struttura di tabella ecommerce.ordini
+CREATE TABLE IF NOT EXISTS `ordini` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_utente` int(11) NOT NULL,
+  `carrello` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_utente` (`id_utente`),
+  CONSTRAINT `ordini_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utenti` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dump dei dati della tabella ecommerce.ordini: ~2 rows (circa)
+INSERT INTO `ordini` (`id`, `id_utente`, `carrello`) VALUES
+	(1, 3, 1),
+	(2, 3, 0);
+
+-- Dump della struttura di tabella ecommerce.oggetti
+CREATE TABLE IF NOT EXISTS `oggetti` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ordine` int(11) DEFAULT NULL,
+  `id_prodotto` int(11) NOT NULL,
+  `sconto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_ordine` (`id_ordine`),
+  KEY `id_prodotto` (`id_prodotto`),
+  CONSTRAINT `oggetti_ibfk_1` FOREIGN KEY (`id_ordine`) REFERENCES `ordini` (`id`),
+  CONSTRAINT `oggetti_ibfk_2` FOREIGN KEY (`id_prodotto`) REFERENCES `prodotti` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO `oggetti` (`id`, `id_ordine`, `id_prodotto`, `sconto`) VALUES
+	(1, 1, 5, NULL),
+	(2, 2, 9, NULL),
+	(3, NULL, 5, NULL),
+	(4, NULL, 5, NULL),
+	(5, NULL, 8, NULL),
+	(6, 2, 7, NULL),
+	(7, NULL, 3, NULL),
+	(8, NULL, 15, NULL),
+	(9, 1, 12, NULL),
+	(10, 1, 20, 25),
+	(11, NULL, 18, NULL),
+	(12, NULL, 4, NULL),
+	(13, 1, 14, 45),
+	(14, NULL, 6, NULL),
+	(15, NULL, 10, NULL),
+	(16, 2, 5, NULL),
+	(17, NULL, 23, NULL),
+	(18, NULL, 17, NULL),
+	(19, NULL, 12, NULL),
+	(20, NULL, 2, NULL),
+	(21, NULL, 9, NULL),
+	(22, 1, 22, NULL),
+	(23, NULL, 13, NULL),
+	(24, NULL, 8, NULL),
+	(25, NULL, 21, 30),
+	(26, 2, 16, NULL),
+	(27, NULL, 24, NULL),
+	(28, NULL, 11, NULL),
+	(29, NULL, 3, NULL),
+	(30, NULL, 19, NULL);

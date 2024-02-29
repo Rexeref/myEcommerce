@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS `utenti` (
 	`id_ruolo` int(11) NOT NULL,
 	`username` varchar(64) NOT NULL,
 	`password` varchar(64) NOT NULL,
-	`salt` varchar(16) NOT NULL,
 	FOREIGN KEY (id_persona) REFERENCES persone(id),
 	FOREIGN KEY (id_ruolo) REFERENCES ruoli(id)
 );
@@ -56,7 +55,7 @@ CREATE TABLE IF NOT EXISTS prodotti (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_categoria INT NOT NULL,
 	id_prodotto INT, -- Se inserito indica che il prodotto in questione è un'opzione/accessorio per il prodotto indicato
-	nome VARCHAR(16) NOT NULL,
+	nome VARCHAR(64) NOT NULL,
 	descrizione TINYTEXT,
 	prezzo INT,
 	immagine VARCHAR(64), -- Contiene la posizione del file nella directory del server
