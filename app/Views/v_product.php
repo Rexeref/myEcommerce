@@ -2,18 +2,58 @@
     <?= esc($title) ?>
 </h2>
 
-<?php if (!empty($prodotto) && is_array($prodotto)): ?>
-        
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><?= esc($prodotto[0]->nome) ?></h5>
-                <p class="card-text"><?= esc($prodotto[0]->descrizione) ?></p>
-            </div>
-        </div>
+<?php if (!empty($oggetti) && is_array($oggetti)): ?>
 
-<?php else: ?>
 
-    <p>Unable to find this product for you.</p>
+        <img src="<?= base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
+            <h5 class="card-title">
+                <?= esc($oggetti[0]->nome) ?>
+            </h5>
+            <p class="card-text">
+                <?= esc($oggetti[0]->descrizione) ?>
+            </p>
 
-<?php endif ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Prezzo</th>
+                <th>Sconto</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($oggetti as $oggetto): ?>
+                <tr>
+                    <td>
+                        <?php
+                        if ($oggetto->sconto == 0 or is_null($oggetto)) {
+                            echo "€" . $oggetto->prezzo;
+                        } else {
+                            echo "€" . ($oggetto->prezzo - $oggetto->prezzo * $oggetto->sconto / 100);
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        if ($oggetto->sconto != 0 or !is_null($oggetto->sconto)) {
+                            echo $oggetto->sconto . "%";
+                        }
+                        else {
+                            echo "Non in sconto";
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <a href="/cart/add?id=<?= esc($oggetto->id) ?>" class="btn btn-primary">
+                            <i class="bi bi-cart"></i>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+    <?php else: ?>
+
+        <p>Unable to find this product for you.</p>
+
+    <?php endif ?>

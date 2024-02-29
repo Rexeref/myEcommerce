@@ -18,20 +18,40 @@ class Prodotti extends BaseController {
                 .view('templates/footer');
     }
 
-    public function details()
+    public function listBest()
     {
         $model = model(ProdottiModel::class);
 
-        $id = $this->request->getGet('id');
-        $item = $model->getProdotto($id);
-
         $data = [
-            'prodotto'  => $item,
-            'title' => $item[0]->nome,
+            'prodotti'  => $model->getMigliori(),
+            'title' => 'Prodotti',
         ];
 
         return view('templates/header', $data)
-        .view('v_product', $data)
-        .view('templates/footer');
+                .view('v_list', $data)
+                .view('templates/footer');
     }
+
+    public function details()
+    {
+        $model = model(ProdottiModel::class);
+    
+        $id = $this->request->getGet('id');
+    
+        $item = $model->getProdottoConTuttiOggetti($id);
+    
+        if (!is_null($item) && isset($item[0])) {
+            $data = [
+                'oggetti' => $item,
+                'title'   => $item[0]->nome,
+            ];
+    
+            return view('templates/header', $data)
+                 . view('v_product', $data)
+                 . view('templates/footer');
+        } else {
+            return redirect()->to("/");
+        }
+    }
+    
 }

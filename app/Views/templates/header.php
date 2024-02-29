@@ -54,13 +54,13 @@
                     <?php else: ?>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="/account"><i class="bi bi-person-circle"></i> <?= esc($session->userName) ?></a>
-                        </li>
-                        <li class="nav-item active">
                             <a class="nav-link" href="/cart"><i class="bi bi-cart"></i> Cart</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Ciao, <?= esc($session->userName) ?>!</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
+                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-left"></i></a>
                         </li>
 
                     <?php endif ?>
@@ -68,7 +68,7 @@
                 </ul>
                 <form class="d-flex" role="search" action="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit">Search</button> <!-- TODO: Ricerca -->
                 </form>
             </div>
         </div>

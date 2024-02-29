@@ -12,9 +12,6 @@
                                 <h5 class="card-title">
                                     <?= esc($prodotti_item->nome) ?>
                                 </h5>
-                                <p class="card-text">
-                                    <?= esc($prodotti_item->descrizione) ?>
-                                </p>
                                 <div class="text-center">
                                     <div style='display: flex; align-items: center;'>
                                     <?php 
@@ -28,7 +25,7 @@
                                         }
                                     ?>
                                     </div>
-                                    <a href="/product?id=<?= esc($prodotti_item->id) ?>" class="btn btn-primary"><i class="bi bi-cart"></i> Acquista</a> //TODO: Aggiungi all'ordine
+                                    <a href="/cart/add?id=<?= esc($prodotti_item->id_oggetto) //TODO: Aggiungi all'ordine ?>" class="btn btn-primary"><i class="bi bi-cart"></i> Acquista</a>
                                     <a href="/product?id=<?= esc($prodotti_item->id) ?>" class="btn btn-secondary"><i class="bi bi-book"></i> Vedi</a>
                                 </div>
                             </div>
