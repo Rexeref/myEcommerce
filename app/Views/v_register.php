@@ -1,72 +1,37 @@
-<h2><?= esc($title) ?></h2>
-
 <?php
-    $session = session();
-    if ( empty( $session->active ) || $session->active == false ):
-
-        echo '<div class="warning">';
-        switch ($error) {
-            case 1:
-                    echo '<h3>Username Vuoto</h3>';
-                break;
-            case 2:
-                    echo '<h3>Password Vuota</h3>';
-                break;
-            case 3:
-                    echo '<h3>Username già presente</h3>';
-                break;
-            default:
-                break;
-        }
-        echo '</div>';
-
+$session = session();
+if (empty($session->active) || $session->active == false):
 ?>
 
-    <form action="register/check" method="POST">
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <!--
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome">
-        </div>
-        <div class="mb-3">
-            <label for="cognome" class="form-label">Cognome</label>
-            <input type="text" class="form-control" id="cognome" name="cognome">
-        </div>
-        <div class="mb-3">
-            <label for="indirizzo" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control" id="indirizzo" name="indirizzo">
-        </div>
-        <div class="mb-3">
-            <label for="completamento_indirizzo" class="form-label">Completamento Indirizzo</label>
-            <input type="text" class="form-control" id="completamento_indirizzo" name="completamento_indirizzo">
-        </div>
-        <div class="mb-3">
-            <label for="stato" class="form-label">Stato</label>
-            <input type="text" class="form-control" id="stato" name="stato">
-        </div>
-        <div class="mb-3">
-            <label for="regione" class="form-label">Regione</label>
-            <input type="text" class="form-control" id="regione" name="regione">
-        </div>
-        <div class="mb-3">
-            <label for="citta" class="form-label">Città</label>
-            <input type="text" class="form-control" id="citta" name="citta">
-        </div>
-        <div class="mb-3">
-            <label for="codice_postale" class="form-label">Codice Postale</label>
-            <input type="text" class="form-control" id="codice_postale" name="codice_postale">
-        </div> -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
+    <div id="form-container" class="text-center">
+        <form class="form-signin" data-bitwarden-watching="1" action="register/check" method="POST">
+            <img class="mb-4" src="<?= base_url('assets/images/logo.png') ?>" alt="Logo" width="250" height="250">
+            <?php
+            echo $error != 0 ? '<div class="bg-warning rounded-3 p-3 bs-text-primary-danger border border-danger-subtle container"><i class="bi-alarm"></i><h5>' : "";
+            switch ($error) {
+                case 1:
+                    echo 'Username Vuoto';
+                    break;
+                case 2:
+                    echo 'Password Vuota';
+                    break;
+                case 3:
+                    echo 'Username già presente';
+                    break;
+                default:
+                    break;
+            }
+            echo $error != 0 ? '</h5></div>' : "";
+            ?>
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username"
+                aria-describedby="emailHelp" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password"
+                required="">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+        </form>
+    </div>
 
 <?php else: ?>
     <h1>sei già loggato!</h1>
