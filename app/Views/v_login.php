@@ -1,28 +1,36 @@
-<h2><?= esc($title) ?></h2>
+<h2>
+    <?= esc($title) ?>
+</h2>
+
+<div class="container-md">
 
 <?php
-    $session = session();
-    if ( empty( $session->active ) || $session->active == false ):
-        
-        echo '<div class="warning">';
+$session = session();
+if (empty($session->active) || $session->active == false):
+
+    if($error != 0)
+    {
+        echo '<div class="bg-warning rounded-3 p-3 bs-text-primary-danger border border-danger-subtle container"><i class="bi-alarm"></i><h5>';
         switch ($error) {
             case 1:
-                    echo '<h3>Username Vuoto</h3>';
+                echo 'Username Vuoto';
                 break;
             case 2:
-                    echo '<h3>Password Vuota</h3>';
+                echo 'Password Vuota';
                 break;
             case 3:
-                    echo '<h3>Account non trovato</h3>';
+                echo 'Credenziali non corrette';
                 break;
             case 4:
-                    echo "<h3>L'account è stato registrato correttamente, ora fai il login</h3>";
+                echo "L'account è stato registrato correttamente, ora fai il login";
                 break;
             default:
                 break;
         }
-        echo '</div>';
-?>
+        echo '</h5></div>';
+    };
+    ?>
+
     <form action="login/check" method="POST">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
@@ -34,6 +42,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
 
 <?php else: ?>
     <h1>sei già loggato!</h1>

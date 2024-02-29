@@ -21,11 +21,11 @@ class Login extends BaseController {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        if ($username == '')
+        if (empty($username))
         {
             return redirect()->to("/login?e=1"); // Nickname Vuoto
         }
-        if ($password == '')
+        if (empty($password))
         {
             return redirect()->to("/login?e=2"); // Password Vuota
         }
@@ -33,14 +33,16 @@ class Login extends BaseController {
         $model = model(AccountModel::class);
         $accountData = $model->checkNickPass($username, $password);
 
-        if(!$accountData['status']) // esegui se status == false
+        if($accountData['username'] === null) // esegui se status == false
         {
             return redirect()->to("/login?e=3"); // Login Errato
         }
-
-        $session = session();
-        $session->active = $accountData['status'];
-        $session->userId = $accountData['userId'];
+        else {
+            $session = session();
+            $session->active = $accountData['status'];
+            $session->userId = $accountData['userId'];
+            $session->userName = $accountData['username'];
+        }
 
         return redirect()->to("/");
     }

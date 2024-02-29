@@ -7,22 +7,6 @@ class AccountModel extends Model
 {
     protected $table = 'utenti';
 
-    # Autore Funzione: Scott Arciszewski
-    private function random_str(
-        int $length = 64,
-        string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    ): string {
-        if ($length < 1) {
-            throw new \RangeException("Length must be a positive integer");
-        }
-        $pieces = [];
-        $max = mb_strlen($keyspace, '8bit') - 1;
-        for ($i = 0; $i < $length; ++$i) {
-            $pieces []= $keyspace[random_int(0, $max)];
-        }
-        return implode('', $pieces);
-    }
-
     public function getList()
     {
         return $this->findAll();
@@ -35,12 +19,10 @@ class AccountModel extends Model
 
     public function registerNewUser($nickname, $password)
     {
-        $salt = $this->random_str();
 
         $data = [
-            "salt" => $salt,
             "username" => hash('sha256', $nickname),
-            "password" => password_hash($password . $salt, PASSWORD_DEFAULT),
+            "password" => password_hash($password, PASSWORD_DEFAULT),
             "id_ruolo" => 3,
         ];
 
@@ -63,13 +45,15 @@ class AccountModel extends Model
         $account = $this->table('utenti')->where('username', $nicknameHash)->first();
 
         $data = [
-            'status' => 'false',
-            'userId' =>  0
+            'status' => false,
+            'userId' =>  0,
+            'username' => null,
         ];
 
-        if ($account && password_verify(password_hash($password . $account['salt'], PASSWORD_DEFAULT), $account['password'])) {
-            $data['status'] = 'true';
+        if ( isset($account) && password_verify($password, $account['password'])) { 
+            $data['status'] = true;
             $data['userId'] = $account['id'];
+            $data['username'] = $nickname;
         }
 
         return $data;
