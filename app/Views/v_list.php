@@ -49,9 +49,9 @@
     </div>
 
 <?php else: ?>
-
+    <div class="container">
     <h3>No prodotti</h3>
 
     <p>Unable to find any prodotti for you.</p>
-
+    </div>
 <?php endif ?>

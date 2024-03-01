@@ -75,6 +75,6 @@ if (!empty($oggetti) && is_array($oggetti)):
     <div class="mx-5 my-5">
         <h3>Il tuo carrello è ancora vuoto!</h3>
 
-        <p>Aggiungici qualcosa prima di tornare . . .  <i class="bi bi-emoji-laughing"></i></p>
+        <p>Aggiungi qualcosa al carrello prima di tornare . . .  <i class="bi bi-emoji-laughing"></i></p>
     </div>
 <?php endif ?>
