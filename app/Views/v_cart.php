@@ -3,6 +3,7 @@ if (!empty($oggetti) && is_array($oggetti)):
     ?>
 
 <div class="container mt-5">
+    <h1>Carrello</h1>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -45,7 +46,7 @@ if (!empty($oggetti) && is_array($oggetti)):
                         }
                         ?>
                     </td>
-                    <td>
+                    <td  class="text-center">
                         <a href="/cart/remove?id=<?= esc($oggetto->id_oggetto) //TODO: Rimuovi  ?> " class="btn btn-danger"><i
                                 class="bi bi-x-square"></i> Rimuovi</a>
                     </td>
@@ -72,8 +73,8 @@ if (!empty($oggetti) && is_array($oggetti)):
 
 <?php else: ?>
     <div class="mx-5 my-5">
-        <h3>Il Carrello è vuoto! </h3>
+        <h3>Il tuo carrello è ancora vuoto!</h3>
 
-        <p>Aggiungici qualcosa prima di tornare <i class="bi bi-emoji-laughing"></i></p>
+        <p>Aggiungici qualcosa prima di tornare . . .  <i class="bi bi-emoji-laughing"></i></p>
     </div>
 <?php endif ?>

@@ -42,18 +42,20 @@ class AccountModel extends Model
 
         $nicknameHash = hash('sha256', $nickname);
 
-        $account = $this->table('utenti')->where('username', $nicknameHash)->first();
+        $account = $this->table('utenti')->join("ruoli", "utenti.id_ruolo = ruoli.id")->where('username', $nicknameHash)->first();
 
         $data = [
             'status' => false,
             'userId' =>  0,
             'username' => null,
+            'livello' => 0
         ];
 
         if ( isset($account) && password_verify($password, $account['password'])) { 
             $data['status'] = true;
             $data['userId'] = $account['id'];
             $data['username'] = $nickname;
+            $data['livello'] = $account['livello'];
         }
 
         return $data;

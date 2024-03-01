@@ -21,10 +21,12 @@ class Ordini extends BaseController {
         $data = [
             'title' => 'Carrello',
             'oggetti' => $model->getCarrello(),
+            'ordini' => $model->getOrdini()
         ];
 
         return view('templates/header', $data)
                 .view('v_cart', $data)
+                .view('v_orders', $data)
                 .view('templates/footer');
     }
 

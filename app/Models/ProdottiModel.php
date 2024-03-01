@@ -38,6 +38,27 @@ class ProdottiModel extends Model
         return $result->getResult();
     }
 
+    public function cerca($ricerca)
+    {   
+        // Prende un prodotto per
+        $sql = "SELECT *
+        FROM (
+            SELECT
+                prodotti.*,
+                oggetti.sconto,
+                oggetti.id as id_oggetto,
+                ROW_NUMBER() OVER (PARTITION BY prodotti.id ORDER BY oggetti.sconto DESC) AS rn
+            FROM prodotti
+            JOIN oggetti ON prodotti.id = oggetti.id_prodotto
+            WHERE id_ordine IS NULL AND nome LIKE ?
+        ) AS subquery
+        WHERE rn = 1;
+        ";
+        $binds = ["%" . $ricerca . "%"];
+        $result = $this->db->query($sql, $binds);
+        return $result->getResult();
+    }
+
     public function getProdotto($value)
     {
         $result = $this->db->table('prodotti')->where('id', $value)->get();

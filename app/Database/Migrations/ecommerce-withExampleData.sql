@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `ruoli` (
 
 -- Dump dei dati della tabella ecommerce.ruoli: ~3 rows (circa)
 INSERT INTO `ruoli` (`id`, `nome_ruolo`, `livello`) VALUES
-	(1, 'Amministratore', 0),
+	(1, 'Amministratore', 25),
 	(2, 'Gestore', 5),
-	(3, 'Cliente', 25);
+	(3, 'Cliente', 0);
 
 -- Dump della struttura di tabella ecommerce.utenti
 CREATE TABLE IF NOT EXISTS `utenti` (

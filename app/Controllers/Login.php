@@ -42,6 +42,7 @@ class Login extends BaseController {
             $session->active = $accountData['status'];
             $session->userId = $accountData['userId'];
             $session->userName = $accountData['username'];
+            $session->livello = $accountData['livello'];
         }
 
         return redirect()->to("/");
@@ -88,6 +89,9 @@ class Login extends BaseController {
     {
         $session = session();
         $session->active = false;
+        $session->userId = 0;
+        $session->userName = "";
+        $session->livello = 0;
         return redirect()->to("/");
     }
 }

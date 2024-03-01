@@ -1,57 +1,73 @@
-<h2>
-    <?= esc($title) ?>
-</h2>
-
 <?php if (!empty($oggetti) && is_array($oggetti)): ?>
 
-
-        <img src="<?= base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
-            <h5 class="card-title">
-                <?= esc($oggetti[0]->nome) ?>
-            </h5>
-            <p class="card-text">
-                <?= esc($oggetti[0]->descrizione) ?>
-            </p>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Prezzo</th>
-                <th>Sconto</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($oggetti as $oggetto): ?>
+    <div class="container mt-4">
+        <div class="text-center">
+            <img src="<?= base_url('uploads/' . $oggetti[0]->immagine) ?>" alt="Card image cap">
+        </div>
+        <?php $session = session();
+        if (!is_null($session->livello) && $session->livello > 4): ?> <!-- Seller -->
+            <div class="text-center mt-3 mb-0">
+                <a href="/cart/add?id=<?= esc($oggetti[0]->id) ?>" class="btn btn-success"><i class="bi bi-plus-square"></i> Aggiungi Oggetto</a> <!-- TODO: Modifica Prodotto -->
+                <a href="/cart/add?id=<?= esc($oggetti[0]->id) ?>" class="btn btn-warning"><i class="bi bi-wrench"></i> Modifica Prodotto</a> <!-- TODO: Modifica Prodotto -->
+                <a href="/cart/add?id=<?= esc($oggetti[0]->id) ?>" class="btn btn-danger"><i class="bi bi-trash"></i> Rimuovi Prodotto</a> <!-- TODO: Rimuovi Prodotto -->
+            </div>
+        <?php endif ?>
+        <h1 class="card-title">
+            <?= esc($oggetti[0]->nome) ?>
+        </h1>
+        <p class="card-text">
+            <?= esc($oggetti[0]->descrizione) ?>
+        </p>
+    </div>
+    <div class="container mt-5">
+        <table class="table table-bordered table-hover">
+            <thead>
                 <tr>
-                    <td>
-                        <?php
-                        if ($oggetto->sconto == 0 or is_null($oggetto)) {
-                            echo "€" . $oggetto->prezzo;
-                        } else {
-                            echo "€" . ($oggetto->prezzo - $oggetto->prezzo * $oggetto->sconto / 100);
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <?php
-                        if ($oggetto->sconto != 0 or !is_null($oggetto->sconto)) {
-                            echo $oggetto->sconto . "%";
-                        }
-                        else {
-                            echo "Non in sconto";
-                        }
-                        ?>
-                    </td>
-                    <td>
-                        <a href="/cart/add?id=<?= esc($oggetto->id) ?>" class="btn btn-primary">
-                            <i class="bi bi-cart"></i>
-                        </a>
-                    </td>
+                    <th class="col-5">Prezzo</th>
+                    <th class="col-4">Sconto</th>
+                    <th class="col-1"></th>
+                    <?php if ($session->livello > 4): ?><th class="col-2 text-danger text-center">Comandi Oggetti</th><?php endif ?>
                 </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($oggetti as $oggetto): ?>
+                    <tr>
+                        <td>
+                            <?php
+                            if ($oggetto->sconto == 0 or is_null($oggetto)) {
+                                echo "€" . $oggetto->prezzo;
+                            } else {
+                                echo "€" . ($oggetto->prezzo - $oggetto->prezzo * $oggetto->sconto / 100);
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            if ($oggetto->sconto != 0 or !is_null($oggetto->sconto)) {
+                                echo $oggetto->sconto . "%";
+                            } else {
+                                echo "Non in sconto";
+                            }
+                            ?>
+                        </td>
+                        <td class="text-center">
+                                <a href="/cart/add?id=<?= esc($oggetto->id) ?>" class="btn btn-primary">
+                                    <i class="bi bi-cart"></i>
+                                </a>
+                        </td>
+                                <!-- Menu Speciali -->
+                            <?php if ($session->livello > 4): ?> <!-- Seller -->
+                                <td class="text-center">
+                                <a href="/cart/add?id=<?= esc($oggetto->id) ?>" class="btn btn-warning"><i
+                                        class="bi bi-wrench"></i></a> <!-- TODO: Modifica oggetto -->
+                                <a href="/cart/add?id=<?= esc($oggetto->id) ?>" class="btn btn-danger"><i
+                                        class="bi bi-trash"></i></a> <!-- TODO: Rimuovi oggetto -->
+                                </td>
+                            <?php endif ?>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
     <?php else: ?>
 
         <p>Unable to find this product for you.</p>

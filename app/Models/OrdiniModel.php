@@ -31,7 +31,21 @@ class OrdiniModel extends Model
         $result = $this->db->query($sql, $binds);
     
         return ($result->getNumRows() > 0);
-    }    
+    }
+
+    public function getOrdini()
+    {
+        $this->createCarrello();
+        $session = session();
+        $sql = "SELECT *, oggetti.id AS id_oggetto, prodotti.id AS id_prodotto
+        FROM ordini
+        LEFT JOIN oggetti ON (oggetti.id_ordine = ordini.id)
+        INNER JOIN prodotti ON (prodotti.id = oggetti.id_prodotto)
+        WHERE ordini.id_utente = ? AND ordini.carrello = 0
+        ";
+        $binds = [$session->userId];
+        return $this->db->query($sql, $binds)->getResult();
+    }
 
     public function getCarrello()
     {   
@@ -76,7 +90,7 @@ class OrdiniModel extends Model
         $getter = $this->db->query($sql, $binds);
         $result = $getter->getResult();
     
-        if (!empty($result) && $session->userId == $result[0]->id_utente) {
+        if (!empty($result) && $session->userId == $result[0]->id_utente) { // Controllo se l'utente che sta compiendo l'azione è il titolare del carrello
             $updateSql = "UPDATE oggetti 
                           SET id_ordine = NULL
                           WHERE  id = ?";

@@ -18,6 +18,20 @@ class Prodotti extends BaseController {
                 .view('templates/footer');
     }
 
+    public function search()
+    {
+        $model = model(ProdottiModel::class);
+
+        $data = [
+            'prodotti'  => $model->cerca($this->request->getGet("search")),
+            'title' => 'Prodotti',
+        ];
+
+        return view('templates/header', $data)
+                .view('v_list', $data)
+                .view('templates/footer');
+    }
+
     public function listBest()
     {
         $model = model(ProdottiModel::class);

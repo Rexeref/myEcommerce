@@ -25,6 +25,11 @@ CREATE TABLE IF NOT EXISTS ruoli (
 	livello INT NOT NULL
 );
 
+INSERT INTO `ruoli` (`id`, `nome_ruolo`, `livello`) VALUES
+	(1, 'Amministratore', 25),
+	(2, 'Gestore', 5),
+	(3, 'Cliente', 0);
+
 CREATE TABLE IF NOT EXISTS `utenti` (
 	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`id_persona` int(11) DEFAULT NULL,
