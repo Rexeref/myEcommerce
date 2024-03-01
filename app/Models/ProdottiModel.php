@@ -9,7 +9,6 @@ class ProdottiModel extends Model
 
     public function getProdottiOggetti()
     {   
-        // Prende un prodotto per
         $result = $this->db->query("SELECT *
         FROM prodotti
         INNER JOIN oggetti ON(oggetti.id_prodotto = prodotti.id)
@@ -75,5 +74,29 @@ class ProdottiModel extends Model
 
         $result = $this->db->query($sql, $binds);
         return $result->getResult();
+    }
+
+    public function getCategorie()
+    {
+        $sql = "SELECT * FROM categorie";
+        $result = $this->db->query($sql, null);
+        return $result->getResult();
+    }
+
+    public function insertNewProduct($product)
+    {
+        $sql = "INSERT INTO prodotti (nome, descrizione, prezzo, id_categoria, immagine, id_prodotto)
+        VALUES
+        (?, ?, ?, ?, ?, ?)
+        ";
+        $binds = [$product->nome, $product->descrizione, $product->prezzo, $product->id_categoria, is_null($product->immagine) ? "noimage.jpg" : $product->immagine, $product->id_accessorio];
+        $result = $this->db->query($sql, $binds);
+        //// Pur di farlo funzionare
+        $sql = "INSERT INTO oggetti (id_prodotto)
+        SELECT MAX(id) FROM prodotti;
+        ";
+        $result = $this->db->query($sql, null);
+        ////
+        return;
     }
 }

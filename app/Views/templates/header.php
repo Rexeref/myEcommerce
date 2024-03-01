@@ -73,7 +73,7 @@
                             <a class="nav-link text-white rounded" aria-current="page">Danger Zone</i></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link text-warning" href="seller/products"><i class="bi bi-database"></i> Aggiungi Prodotto</a>
+                            <a class="nav-link text-warning" href="seller/addProduct"><i class="bi bi-database"></i> Aggiungi Prodotto</a>
                         </li>
                         <?php if ($session->livello > 24): ?> <!-- Admin -->
                             <li class="nav-item active">

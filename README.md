@@ -12,6 +12,8 @@ Il progetto è un'applicazione web che offre funzionalità di e-commerce per la 
 ```
 ;extension=intl
 ;extension=zip
+extension=fileinfo
+extension=gd
 ```
 3. Scaricare le dipendenze
 ```

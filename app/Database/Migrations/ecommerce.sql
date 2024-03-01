@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS categorie (
 	id_categoria INT, -- Se inserito indica che la categoria in questione è figlia di quella indicata
 	nome VARCHAR(16) NOT NULL,
 	descrizione TINYTEXT,
-	immagine VARCHAR(64), -- Contiene la posizione del file nella directory del server
+	immagine VARCHAR(64) DEFAULT "noimage.jpg", -- Contiene la posizione del file nella directory del server
 	FOREIGN KEY (id_categoria) REFERENCES categorie(id)
 );
 
