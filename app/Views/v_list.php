@@ -14,12 +14,14 @@
 
     <div class="album py-5">
         <div class="container">
-            <div class="row">
+            <div class="row gy-3">
 
                 <?php foreach ($prodotti as $prodotti_item): ?>
-                    <div class="col-md-3">
-                        <div class="card mb-4 box-shadow">
-                            <img src="<?= base_url('uploads/' . $prodotti_item->immagine) ?>" alt="Card image cap">
+                    <div class="col-lg-3">
+                        <div class="card mb-4 h-100 box-shadow">
+                            <div style="height:30vh; overflow: hidden;">
+                                <img class="card-img-top h-100 img-fluid object-cover" src="<?= file_exists('uploads/' . $prodotti_item->immagine) ? base_url('uploads/' . $prodotti_item->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <?= esc($prodotti_item->nome) ?>

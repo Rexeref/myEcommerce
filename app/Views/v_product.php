@@ -2,13 +2,13 @@
 
     <div class="container mt-4">
         <div class="text-center">
-            <img src="<?= base_url('uploads/' . $oggetti[0]->immagine) ?>" alt="Card image cap">
+            <img class="w-50 rounded" src="<?= file_exists('uploads/' . $oggetti[0]->immagine) ? base_url('uploads/' . $oggetti[0]->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
         </div>
         <?php $session = session();
         if (!is_null($session->livello) && $session->livello > 4): ?> <!-- Seller -->
             <div class="text-center mt-3 mb-0 p-2 bg-dark rounded">
                 <a href="/cart/add?id=<?= esc($oggetti[0]->id) ?>" class="btn text-success"><i class="bi bi-plus-square"></i> Aggiungi Oggetto</a> <!-- TODO: Modifica Prodotto -->
-                <a href="seller/modProduct?id=<?= esc($oggetti[0]->id) ?>" class="btn text-warning"><i class="bi bi-wrench"></i> Modifica Prodotto</a> <!-- TODO: Modifica Prodotto -->
+                <a href="seller/modProduct?id=<?= esc($oggetti[0]->id_prodotto) ?>" class="btn text-warning"><i class="bi bi-wrench"></i> Modifica Prodotto</a> <!-- TODO: Modifica Prodotto -->
                 <a href="/cart/add?id=<?= esc($oggetti[0]->id) ?>" class="btn text-danger"><i class="bi bi-trash"></i> Rimuovi Prodotto</a> <!-- TODO: Rimuovi Prodotto -->
             </div>
         <?php endif ?>

@@ -2,6 +2,11 @@
 # Operating Specific Junk Files
 #-------------------------
 
+# CUSTOM
+public/uploads/*
+!public/uploads/noimage.jpg
+
+
 # OS X
 .DS_Store
 .AppleDouble

@@ -27,8 +27,10 @@ $routes->get('cart', [Ordini::class, 'seeCarrello']);
 // Special
 $routes->post('seller/addProduct/confirm', [Prodotti::class, 'addProductConfirm']);
 $routes->get('seller/addProduct', [Prodotti::class, 'addProduct']);
-$routes->post('seller/modProduct/confirm', [Prodotti::class, 'modifyProduct']);
+$routes->post('seller/modProduct/confirm', [Prodotti::class, 'addProductConfirm']);
 $routes->get('seller/modProduct', [Prodotti::class, 'modifyProduct']);
+$routes->get('seller/remProduct/confirm', [Prodotti::class, 'removeProductConfirm']);
+$routes->get('seller/remProduct', [Prodotti::class, 'removeProduct']);
 $routes->get('admin/roles', [Login::class, 'ruoli']);
 $routes->get('admin/users', [Login::class, 'utenti']);
 

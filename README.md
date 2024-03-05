@@ -14,6 +14,11 @@ Il progetto è un'applicazione web che offre funzionalità di e-commerce per la 
 ;extension=zip
 extension=fileinfo
 extension=gd
+3. Aggiungere le seguenti direttive custom nel php.ini
+```
+upload_max_filesize = 16M
+post_max_size = 16M
+```
 ```
 3. Scaricare le dipendenze
 ```

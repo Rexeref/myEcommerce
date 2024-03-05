@@ -90,7 +90,6 @@ class Prodotti extends BaseController
         } else {
             return redirect()->to("/");
         }
-
     }
 
     public function addProduct()
@@ -115,30 +114,37 @@ class Prodotti extends BaseController
 
     public function addProductConfirm()
     {
+
         $session = session();
         if ($session->livello > 4) {
-            $imageFile = $this->request->getFile('image');
+            $imageFile = $this->request->getFile('immagine');
             $newName = null;
-            if ($imageFile && !$imageFile->hasMoved()) {
+    
+            if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
                 $newName = $imageFile->getRandomName();
                 $imageFile->move(ROOTPATH . 'public/uploads', $newName);
             }
-
+    
             $model = model(ProdottiModel::class);
-            $product = (object) [
+            $product = [
                 'nome' => $this->request->getPost('nome'),
                 'descrizione' => $this->request->getPost('descrizione'),
                 'prezzo' => $this->request->getPost('prezzo'),
                 'id_categoria' => $this->request->getPost('id_categoria'),
                 'immagine' => $newName,
-                'id_accessorio' => $this->request->getPost('id_accessorio'),
+                'id_prodotto' => $this->request->getPost('id_accessorio'),
+                'id' => $this->request->getPost('id'),
             ];
-            $error = $model->insertNewProduct($product);
+            
+            if($this->request->getPost('id') == null){
+                $model->insertNewProduct($product);
+            }
+            else{
+                $model->modifyProduct($product);
+            }
         }
-
+    
         return redirect()->to("/");
-
     }
-
 
 }

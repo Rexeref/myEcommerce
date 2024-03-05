@@ -86,17 +86,28 @@ class ProdottiModel extends Model
     public function insertNewProduct($product)
     {
         $sql = "INSERT INTO prodotti (nome, descrizione, prezzo, id_categoria, immagine, id_prodotto)
-        VALUES
-        (?, ?, ?, ?, ?, ?)
-        ";
-        $binds = [$product->nome, $product->descrizione, $product->prezzo, $product->id_categoria, is_null($product->immagine) ? "noimage.jpg" : $product->immagine, $product->id_accessorio];
+                VALUES (?, ?, ?, ?, ?, ?)";
+        
+        $binds = [$product['nome'], $product['descrizione'], $product['prezzo'], $product['id_categoria'], is_null($product['immagine']) ? "noimage.jpg" : $product['immagine'], $product['id_prodotto']];
+        
         $result = $this->db->query($sql, $binds);
-        //// Pur di farlo funzionare
-        $sql = "INSERT INTO oggetti (id_prodotto)
-        SELECT MAX(id) FROM prodotti;
-        ";
-        $result = $this->db->query($sql, null);
-        ////
-        return;
+    
+        // Retrieve the last inserted ID
+        $lastInsertID = $this->db->insertID();
+    
+        // Insert into the 'oggetti' table
+        $sql = "INSERT INTO oggetti (id_prodotto) VALUES (?)";
+        $binds = [$lastInsertID];
+        $this->db->query($sql, $binds);
     }
+
+    public function modifyProduct($product)
+    {
+        $sql = "UPDATE prodotti SET nome = ?, descrizione = ?, prezzo = ?, id_categoria = ?, id_prodotto = ? WHERE id = ?";
+        
+        $binds = [$product['nome'], $product['descrizione'], $product['prezzo'], $product['id_categoria'], $product['id_prodotto'], $product['id']];
+        
+        $this->db->query($sql, $binds);
+    }
+    
 }
