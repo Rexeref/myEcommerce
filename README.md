@@ -20,7 +20,6 @@ extension=gd
 upload_max_filesize = 16M
 post_max_size = 16M
 ```
-```
 3. Scaricare le dipendenze
 ```
 composer install
