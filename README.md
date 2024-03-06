@@ -20,14 +20,14 @@ extension=gd
 upload_max_filesize = 16M
 post_max_size = 16M
 ```
-3. Scaricare le dipendenze
+4. Scaricare le dipendenze
 ```
 composer install
 composer update
 ```
-4. Creare una copia del file **env-dummy** con il nome **.env** dove si configurerà l'accesso al DB MySQL
-5. Utilizzare i file in *./app/Database/Migrations/* per creare un database di esempio o uno vuoto
-6. Avviare con il seguente comando il server 
+5. Creare una copia del file **env-dummy** con il nome **.env** dove si configurerà l'accesso al DB MySQL
+6. Utilizzare i file in *./app/Database/Migrations/* per creare un database di esempio o uno vuoto
+7. Avviare con il seguente comando il server 
 ```
 php spark serve
 ```
