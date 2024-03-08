@@ -19,8 +19,8 @@
                 <?php foreach ($prodotti as $prodotti_item): ?>
                     <div class="col-lg-3">
                         <div class="card mb-4 h-100 box-shadow">
-                            <div style="height:30vh; overflow: hidden;">
-                                <img class="card-img-top h-100 img-fluid object-cover" src="<?= file_exists('uploads/' . $prodotti_item->immagine) ? base_url('uploads/' . $prodotti_item->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
+                            <div style="height:30vh; position: relative; overflow: hidden;">
+                                <img  class="card-img-top" style="position: absolute; top: 50%; transform: translateY(-50%); width: 100%; height: auto;" src="<?= file_exists('uploads/' . $prodotti_item->immagine) ? base_url('uploads/' . $prodotti_item->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">

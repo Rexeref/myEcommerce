@@ -5,7 +5,7 @@
 # CUSTOM
 public/uploads/*
 !public/uploads/noimage.jpg
-
+!public/uploads/example
 
 # OS X
 .DS_Store

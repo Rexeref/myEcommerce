@@ -2,7 +2,7 @@
 
     <div class="container mt-4">
         <div class="text-center">
-            <img class="w-50 rounded" src="<?= file_exists('uploads/' . $oggetti[0]->immagine) ? base_url('uploads/' . $oggetti[0]->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
+            <img style="height : 50vh;" class="rounded" src="<?= file_exists('uploads/' . $oggetti[0]->immagine) ? base_url('uploads/' . $oggetti[0]->immagine) : base_url('uploads/noimage.jpg') ?>" alt="Card image cap">
         </div>
         <?php $session = session();
         if (!is_null($session->livello) && $session->livello > 4): ?> <!-- Seller -->
