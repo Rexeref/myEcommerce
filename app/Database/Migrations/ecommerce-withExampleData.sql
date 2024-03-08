@@ -161,30 +161,34 @@ INSERT INTO `utenti` (`id`, `id_persona`, `id_ruolo`, `username`, `password`) VA
 
 -- Dump della struttura di tabella ecommerce.ordini
 CREATE TABLE IF NOT EXISTS `ordini` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_utente` int(11) NOT NULL,
-  `carrello` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_utente` (`id_utente`),
-  CONSTRAINT `ordini_ibfk_1` FOREIGN KEY (`id_utente`) REFERENCES `utenti` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `id_utente` int(11) NOT NULL,
+ `datacreazioneordine` TIMESTAMP NULL DEFAULT NULL,
+ FOREIGN KEY (id_utente) REFERENCES utenti(id)
+);
 
+-- TODO: Gestione carrello/ordine utilizzando i timestamp
 -- Dump dei dati della tabella ecommerce.ordini: ~2 rows (circa)
-INSERT INTO `ordini` (`id`, `id_utente`, `carrello`) VALUES
-	(1, 3, 1),
-	(2, 3, 0);
+INSERT INTO `ordini` (`id`, `id_utente`, `datacreazioneordine`) VALUES
+	(1, 3, '2021-05-12 17:24:21'),
+	(2, 3, NULL);
 
+-- TODO: Utilizzo nella view ordini dei dati vecchi, non aggiornati
 -- Dump della struttura di tabella ecommerce.oggetti
 CREATE TABLE IF NOT EXISTS `oggetti` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ordine` int(11) DEFAULT NULL,
-  `id_prodotto` int(11) NOT NULL,
-  `sconto` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ordine` (`id_ordine`),
-  KEY `id_prodotto` (`id_prodotto`),
-  CONSTRAINT `oggetti_ibfk_1` FOREIGN KEY (`id_ordine`) REFERENCES `ordini` (`id`),
-  CONSTRAINT `oggetti_ibfk_2` FOREIGN KEY (`id_prodotto`) REFERENCES `prodotti` (`id`)
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`id_ordine` int(11) DEFAULT NULL,
+	`id_prodotto` int(11) NOT NULL,
+	`sconto` int(11) DEFAULT NULL,
+	`bknome` varchar(64) NOT NULL,
+	`bkdescrizione` tinytext DEFAULT NULL,
+	`bkprezzo` int(11) DEFAULT NULL,
+	`bkimmagine` varchar(64) DEFAULT "noimage.jpg",
+	PRIMARY KEY (`id`),
+	KEY `id_ordine` (`id_ordine`),
+	KEY `id_prodotto` (`id_prodotto`),
+	CONSTRAINT `oggetti_ibfk_1` FOREIGN KEY (`id_ordine`) REFERENCES `ordini` (`id`),
+	CONSTRAINT `oggetti_ibfk_2` FOREIGN KEY (`id_prodotto`) REFERENCES `prodotti` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 

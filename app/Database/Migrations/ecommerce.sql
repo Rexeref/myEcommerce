@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `ecommerce`;
+CREATE DATABASE IF NOT EXISTS `ecommerce`; -- TODO: Aggiornare questo file utilizzando la configurazione creata in ecommerce-withExampleData.sql
 USE `ecommerce`;
 
 CREATE TABLE IF NOT EXISTS indirizzi (
